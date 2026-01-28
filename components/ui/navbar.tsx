@@ -1,78 +1,55 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { inter } from "./fonts";
+import { Bars3Icon } from "@heroicons/react/24/solid";
+import { useEffect, useState } from "react";
+import { Button } from "./button";
+import { NavLinks } from "./nav-links";
+import { Sidebar } from "./side-bar";
 import { BlogitLogo } from "./blogit-logo";
-import { links, NavLinks } from "./nav-links";
-import Link from "next/link";
-import {
-   Bars3BottomRightIcon,
-   ChevronRightIcon,
-   XMarkIcon,
-} from "@heroicons/react/24/solid";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
 
 export function Navbar() {
+   const [isScrolled, setIsScrolled] = useState(false);
    const [isOpen, setIsOpen] = useState(false);
-   return (
-      <>
-         <nav
-            className={`${inter.className} antialiased flex items-center justify-between border-b border-b-gray-200 px-4 min-[1152px]:px-0 py-5`}
-         >
-            <Link href="/">
-               <BlogitLogo />
-            </Link>
-            <div className="hidden md:flex items-center gap-12">
-               <NavLinks />
-               <Button>Get Started</Button>
-            </div>
-            <div className="md:hidden">
-               {!isOpen && (
-                  <Bars3BottomRightIcon
-                     className="size-6"
-                     onClick={() => setIsOpen(true)}
-                  />
-               )}
-               {isOpen && (
-                  <XMarkIcon
-                     className="size-6"
-                     onClick={() => setIsOpen(false)}
-                  />
-               )}
-            </div>
-         </nav>
-         {isOpen && <MobileNav />}
-      </>
-   );
-}
 
-export function MobileNav() {
-   const pathname = usePathname();
+   useEffect(() => {
+      const handleScroll = () => {
+         setIsScrolled(window.scrollY > 20);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+   }, []);
 
    return (
-      <div className="absolute md:hidden w-full top-17.25 right-0 py-5 px-4 text-gray-600 shadow-lg">
-         <div className="flex flex-col justify-between gap-3">
-            {links.map(({ href, name }) => (
-               <Link
-                  key={name}
-                  href={href}
-                  className={clsx(
-                     "hover:text-foreground hover:font-medium transition-all",
-                     {
-                        "text-foreground font-medium": pathname === href,
-                     },
-                  )}
-               >
-                  {name}
-               </Link>
-            ))}
-            <Button className="w-full flex items-center justify-center mt-4 group">
-               Get Started{" "}
-               <ChevronRightIcon className="size-4 ml-2 group-hover:ml-4 transition-all text-white" />
+      <header
+         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            isScrolled
+               ? "bg-background/80 backdrop-blur-lg border-b border-b-muted-foreground/30"
+               : "bg-transparent"
+         }`}
+      >
+         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
+            <BlogitLogo />
+
+            <NavLinks />
+
+            <div className="hidden items-center gap-3 lg:flex">
+               <Button className="bg-transparent hover:bg-primary hover:text-primary-foreground rounded-lg transition-colors">
+                  Sign In
+               </Button>
+               <Button className="rounded-lg bg-primary text-primary-foreground">
+                  Start Writing
+               </Button>
+            </div>
+
+            <Button
+               className="flex items-center hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
+               onClick={() => setIsOpen(true)}
+            >
+               <Bars3Icon className="size-5 " />
             </Button>
-         </div>
-      </div>
+
+            {isOpen && <Sidebar setIsOpen={setIsOpen} />}
+         </nav>
+      </header>
    );
 }

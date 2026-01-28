@@ -1,7 +1,9 @@
-export default function Home() {
+import { Hero } from "@/components/ui/hero";
+
+export default function Page() {
    return (
-      <div className="items-center font-sans">
-         lets get to the home page now
-      </div>
+      <>
+         <Hero />
+      </>
    );
 }

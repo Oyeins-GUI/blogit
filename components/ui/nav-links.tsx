@@ -1,28 +1,38 @@
-"use client";
-
-import clsx from "clsx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-export const links = [
-   { href: "/about", name: "About" },
-   { href: "/support", name: "Support" },
-   { href: "/blog", name: "Blog" },
+const navLinks = [
+   { href: "#", label: "Home" },
+   { href: "#blog", label: "Blog" },
+   { href: "#features", label: "Features" },
+   { href: "#community", label: "Community" },
 ];
 
 export function NavLinks() {
-   const pathname = usePathname();
    return (
-      <div className="flex gap-6 text-sm text-gray-600">
-         {links.map(({ href, name }) => (
+      <div className="hidden items-center gap-1 lg:flex">
+         {navLinks.map((link) => (
             <Link
-               key={name}
-               href={href}
-               className={clsx("", {
-                  "text-foreground font-medium": pathname === href,
-               })}
+               key={link.label}
+               href={link.href}
+               className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary/50"
             >
-               {name}
+               {link.label}
+            </Link>
+         ))}
+      </div>
+   );
+}
+
+export function MobileNavLinks() {
+   return (
+      <div className="flex flex-col gap-1">
+         {navLinks.map((link) => (
+            <Link
+               key={link.label}
+               href={link.href}
+               className="px-4 py-3 text-base text-muted-foreground hover:text-foreground hover:bg-secondary/80 rounded-lg transition-colors"
+            >
+               {link.label}
             </Link>
          ))}
       </div>
