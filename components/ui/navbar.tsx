@@ -42,10 +42,10 @@ export function Navbar() {
             </div>
 
             <Button
-               className="flex items-center hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
+               className="flex items-center text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
                onClick={() => setIsOpen(true)}
             >
-               <Bars3Icon className="size-5 " />
+               <Bars3Icon className="size-5" />
             </Button>
 
             {isOpen && <Sidebar setIsOpen={setIsOpen} />}
