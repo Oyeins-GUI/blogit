@@ -3,8 +3,21 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { MobileNavLinks } from "./nav-links";
 import { Button } from "./button";
+import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
+import { useCallback } from "react";
 
-export function Sidebar({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
+export function Sidebar({
+   isOpen,
+   setIsOpen,
+}: {
+   isOpen: boolean;
+   setIsOpen: (open: boolean) => void;
+}) {
+   const close = useCallback(() => {
+      setIsOpen(false);
+   }, [setIsOpen]);
+   useLockBodyScroll(isOpen);
+
    return (
       <div className="absolute inset-0 w-full min-h-dvh bg-primary-foreground/80">
          <div className="w-xs ml-auto bg-primary-foreground h-full">
@@ -14,7 +27,7 @@ export function Sidebar({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
                      className="size-5 ml-auto mr-4 mb-2 text-foreground"
                      onClick={() => setIsOpen(false)}
                   />
-                  <MobileNavLinks />
+                  <MobileNavLinks closeSidebar={close} />
                </div>
 
                <div className="flex flex-col gap-3 px-4 py-4 border-t border-muted-foreground/30">

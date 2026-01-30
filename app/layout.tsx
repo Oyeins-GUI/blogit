@@ -3,7 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/ui/navbar";
 
 export const metadata: Metadata = {
-   title: "Blog It",
+   title: "Blogit",
    description: "Share your story with the world",
 };
 

@@ -38,7 +38,7 @@ export function NavLinks() {
    );
 }
 
-export function MobileNavLinks() {
+export function MobileNavLinks({ closeSidebar }: { closeSidebar: () => void }) {
    const pathname = usePathname();
 
    return (
@@ -50,6 +50,7 @@ export function MobileNavLinks() {
                <Link
                   key={link.label}
                   href={link.href}
+                  onClick={closeSidebar}
                   className={clsx(
                      "px-4 py-3 text-base rounded-lg transition-colors hover:bg-secondary/80",
                      isActive

@@ -6,6 +6,7 @@ import { Button } from "./button";
 import { NavLinks } from "./nav-links";
 import { Sidebar } from "./side-bar";
 import { BlogitLogo } from "./blogit-logo";
+import { AnimatePresence, motion } from "motion/react";
 
 export function Navbar() {
    const [isScrolled, setIsScrolled] = useState(false);
@@ -41,14 +42,22 @@ export function Navbar() {
                </Button>
             </div>
 
-            <Button
-               className="flex items-center text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
-               onClick={() => setIsOpen(true)}
-            >
-               <Bars3Icon className="size-5" />
-            </Button>
+            <div>
+               <Button
+                  className="flex items-center text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
+                  onClick={() => setIsOpen(true)}
+               >
+                  <Bars3Icon className="size-5" />
+               </Button>
 
-            {isOpen && <Sidebar setIsOpen={setIsOpen} />}
+               <AnimatePresence>
+                  {isOpen && (
+                     <motion.div key="sidebar" exit={{ opacity: 0 }}>
+                        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+                     </motion.div>
+                  )}
+               </AnimatePresence>
+            </div>
          </nav>
       </header>
    );
