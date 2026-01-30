@@ -5,6 +5,7 @@ import { MobileNavLinks } from "./nav-links";
 import { Button } from "./button";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import { useCallback } from "react";
+import Link from "next/link";
 
 export function Sidebar({
    isOpen,
@@ -31,11 +32,22 @@ export function Sidebar({
                </div>
 
                <div className="flex flex-col gap-3 px-4 py-4 border-t border-muted-foreground/30">
-                  <Button className="items-center justify-center bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground border border-muted-foreground/30 rounded-lg">
-                     Sign In
+                  <Button
+                     className="items-center justify-center bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground border border-muted-foreground/30 rounded-lg"
+                     onClick={() => setIsOpen(false)}
+                  >
+                     <Link href="/signin" className="block w-full">
+                        Sign In
+                     </Link>
                   </Button>
-                  <Button className="items-center justify-center bg-primary text-primary-foreground rounded-lg">
-                     Start Writing
+
+                  <Button
+                     className="items-center justify-center bg-primary text-primary-foreground rounded-lg"
+                     onClick={() => setIsOpen(false)}
+                  >
+                     <Link href="#" className="block w-full">
+                        Start Writing
+                     </Link>
                   </Button>
                </div>
             </div>

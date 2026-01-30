@@ -27,7 +27,7 @@ const features = [
 
 export function WhyChooseUs() {
    return (
-      <section className="max-w-6xl mx-auto mb-10 px-4 md:px-0 bg-background">
+      <section className="max-w-6xl mx-auto mb-10 px-4 lg:px-0 bg-background">
          <div className="flex items-center gap-4">
             <span className="w-full border-t border-t-muted-foreground/20" />
             <p className="uppercase font-bold text-sm text-muted-foreground min-w-max">
@@ -38,7 +38,7 @@ export function WhyChooseUs() {
          <h2 className="text-balance text-center mx-auto mt-4 font-serif max-w-2xl text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
             Dedicated to Creativity, Culture & Growth.
          </h2>
-         <div className="grid gap-0 md:grid-cols-3 md:gap-8">
+         <div className="grid gap-0 lg:grid-cols-3 lg:gap-8">
             {features.map((feature, index) => {
                return (
                   <div

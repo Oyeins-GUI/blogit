@@ -42,9 +42,9 @@ export function Navbar() {
                </Button>
             </div>
 
-            <div>
+            <div className="lg:hidden">
                <Button
-                  className="flex items-center text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg lg:hidden"
+                  className="flex items-center text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg"
                   onClick={() => setIsOpen(true)}
                >
                   <Bars3Icon className="size-5" />

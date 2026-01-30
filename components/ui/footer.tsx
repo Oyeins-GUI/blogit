@@ -9,7 +9,7 @@ export function Footer() {
             <div className="flex flex-col md:flex-row md:justify-between mb-8">
                <div>
                   <BlogitLogo />
-                  <p className="lg:max-w-xs mt-2">
+                  <p className="md:max-w-xs mt-2">
                      Blogit is a modern blogging platform where ideas come to
                      life. Share your thoughts, connect with readers, and be
                      part of a vibrant community.
