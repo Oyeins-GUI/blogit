@@ -1,6 +1,8 @@
 import { env } from "@/env";
 import { MongoClient } from "mongodb";
 
+const MONGODB_URI = env.MONGODB_URI!;
+
 export let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
@@ -11,13 +13,13 @@ if (env.NODE_ENV === "development") {
    };
 
    if (!globalWithMongo._mongoClientPromise) {
-      client = new MongoClient(env.MONGODB_URI, {});
+      client = new MongoClient(MONGODB_URI, {});
       globalWithMongo._mongoClientPromise = client.connect();
    }
 
    clientPromise = globalWithMongo._mongoClientPromise;
 } else {
-   client = new MongoClient(env.MONGODB_URI, {});
+   client = new MongoClient(MONGODB_URI, {});
    clientPromise = client.connect();
 }
 
