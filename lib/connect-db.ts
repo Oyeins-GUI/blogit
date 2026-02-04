@@ -1,6 +1,8 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) throw new Error("Missing MONGODB_URI environment variable");
 
 export let client: MongoClient;
 let clientPromise: Promise<MongoClient>;

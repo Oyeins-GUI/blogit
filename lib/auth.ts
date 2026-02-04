@@ -7,10 +7,10 @@ export const auth = betterAuth({
    emailAndPassword: {
       enabled: true,
    },
-   socialProviders: {
-      google: {
-         clientId: "",
-         clientSecret: "",
-      },
-   },
+   // socialProviders: {
+   //    google: {
+   //       clientId: "",
+   //       clientSecret: "",
+   //    },
+   // },
 });
