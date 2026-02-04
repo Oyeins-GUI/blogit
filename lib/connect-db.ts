@@ -1,7 +1,6 @@
-import { env } from "@/env";
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI!;
 
 export let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
