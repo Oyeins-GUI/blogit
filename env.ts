@@ -1,5 +1,7 @@
 import z from "zod";
 
+const isCI = process.env.CI === "true";
+
 const envSchema = z.object({
    NODE_ENV: z.enum(["development", "production", "test"]),
    BETTER_AUTH_URL: z.url(),
@@ -9,15 +11,21 @@ const envSchema = z.object({
    NEXT_PUBLIC_BASE_URL: z.url(),
 });
 
-const parsed = envSchema.safeParse(process.env);
+let env: z.infer<typeof envSchema>;
 
-if (!parsed.success) {
-   const tree = z.treeifyError(parsed.error);
+if (isCI) {
+   env = {} as never;
+} else {
+   const parsed = envSchema.safeParse(process.env);
 
-   console.error("❌ Invalid environment variables:");
-   console.dir(tree, { depth: null });
+   if (!parsed.success) {
+      const tree = z.treeifyError(parsed.error);
+      console.error("❌ Invalid environment variables:");
+      console.dir(tree, { depth: null });
+      throw new Error("Invalid environment variables");
+   }
 
-   throw new Error("Invalid environment variables");
+   env = parsed.data;
 }
 
-export const env = parsed.data;
+export { env };
