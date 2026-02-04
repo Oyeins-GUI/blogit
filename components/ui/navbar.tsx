@@ -7,6 +7,7 @@ import { NavLinks } from "./nav-links";
 import { Sidebar } from "./side-bar";
 import { BlogitLogo } from "./blogit-logo";
 import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
 
 export function Navbar() {
    const [isScrolled, setIsScrolled] = useState(false);
@@ -35,10 +36,10 @@ export function Navbar() {
 
             <div className="hidden items-center gap-3 lg:flex">
                <Button className="bg-transparent hover:bg-primary hover:text-primary-foreground rounded-lg transition-colors">
-                  Sign In
+                  <Link href="/signin">Sign in</Link>
                </Button>
                <Button className="rounded-lg bg-primary text-primary-foreground">
-                  Start Writing
+                  <Link href="/get-started">Start Writing</Link>
                </Button>
             </div>
 
