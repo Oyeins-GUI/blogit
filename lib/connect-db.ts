@@ -1,12 +1,11 @@
-import { env } from "@/env";
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI!;
 
 export let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
    // Prevent hot-reload issues in dev
    const globalWithMongo = global as typeof globalThis & {
       _mongoClientPromise?: Promise<MongoClient>;
