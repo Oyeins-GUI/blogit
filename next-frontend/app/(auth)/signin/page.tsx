@@ -1,3 +1,3 @@
 export default function Page() {
-   return <p>sign in page</p>;
+   return <p>sign in page without functionality</p>;
 }
